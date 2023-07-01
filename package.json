@@ -2,7 +2,6 @@
   "name": "open-music-v1",
   "version": "1.0.0",
   "description": "submission dicoding backend fundamentals",
-  "type": "commonjs",
   "main": "./src/server.js",
   "scripts": {
     "start-prod": "set NODE_ENV=production node ./src/server.js",
