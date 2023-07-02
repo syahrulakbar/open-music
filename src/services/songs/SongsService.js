@@ -64,6 +64,16 @@ class SongsService {
     return result.rows[0];
   }
 
+  async getSongsByAlbumId(albumId) {
+    const querySongs = {
+      text: 'SELECT id, title, performer FROM songs WHERE "albumId" = $1',
+      values: [albumId],
+    };
+    const resultSongs = await this._pool.query(querySongs);
+
+    return resultSongs.rows;
+  }
+
   async editSongById(id, { title, year, genre, performer, duration, albumId }) {
     const query = {
       text: 'UPDATE songs SET title = $1, year = $2, genre = $3, performer = $4, duration = $5, "albumId" = $6 WHERE id = $7 RETURNING id',

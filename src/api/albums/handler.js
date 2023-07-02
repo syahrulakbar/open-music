@@ -1,9 +1,12 @@
 /* eslint-disable no-underscore-dangle */
+const SongsService = require("../../services/songs/SongsService");
 
 class AlbumsHandler {
   constructor(service, validator) {
     this._service = service;
     this._validator = validator;
+
+    this.songsService = new SongsService();
   }
 
   async postAlbumHandler(request, h) {
@@ -28,10 +31,12 @@ class AlbumsHandler {
     const { id } = request.params;
     const album = await this._service.getAlbumById(id);
 
+    const songs = await this.songsService.getSongsByAlbumId(id);
+
     const response = h.response({
       status: "success",
       data: {
-        album,
+        album: { ...album, songs },
       },
     });
 
