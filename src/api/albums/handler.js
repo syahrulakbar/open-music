@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const SongsService = require("../../services/songs/SongsService");
+const SongsService = require("../../services/SongsService");
 
 class AlbumsHandler {
   constructor(service, validator) {
