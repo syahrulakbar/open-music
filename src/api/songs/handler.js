@@ -1,5 +1,3 @@
-/* eslint-disable object-curly-newline */
-
 class SongsHandler {
   constructor(service, validator) {
     this._service = service;
@@ -9,16 +7,7 @@ class SongsHandler {
   async postSongHandler(request, h) {
     this._validator.validateSongPayload(request.payload);
 
-    const { title, year, genre, performer, duration, albumId } = request.payload;
-
-    const songId = await this._service.addSong({
-      title,
-      year,
-      genre,
-      performer,
-      duration,
-      albumId,
-    });
+    const songId = await this._service.addSong(request.payload);
 
     const response = h.response({
       status: "success",
@@ -65,16 +54,8 @@ class SongsHandler {
     this._validator.validateSongPayload(request.payload);
 
     const { id } = request.params;
-    const { title, year, genre, performer, duration, albumId } = request.payload;
 
-    await this._service.editSongById(id, {
-      title,
-      year,
-      genre,
-      performer,
-      duration,
-      albumId,
-    });
+    await this._service.editSongById(id, request.payload);
 
     const response = h.response({
       status: "success",
