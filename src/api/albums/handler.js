@@ -1,12 +1,9 @@
-/* eslint-disable no-underscore-dangle */
-const SongsService = require("../../services/SongsService");
-
 class AlbumsHandler {
-  constructor(service, validator) {
+  constructor(service, validator, songsService) {
     this._service = service;
     this._validator = validator;
 
-    this.songsService = new SongsService();
+    this.songsService = songsService;
   }
 
   async postAlbumHandler(request, h) {

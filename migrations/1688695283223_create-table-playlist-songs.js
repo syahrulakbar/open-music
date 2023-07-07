@@ -1,24 +1,26 @@
 /* eslint-disable camelcase */
 
 exports.up = (pgm) => {
-  pgm.createTable("playlists", {
+  pgm.createTable("playlist_songs", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    name: {
-      type: "TEXT",
-      notNull: true,
-    },
-    owner: {
+    playlist_id: {
       type: "VARCHAR(50)",
       notNull: true,
-      references: "users",
+      references: "playlists",
+      onDelete: "cascade",
+    },
+    song_id: {
+      type: "VARCHAR(50)",
+      notNull: true,
+      references: "songs",
       onDelete: "cascade",
     },
   });
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable("playlists");
+  pgm.dropTable("playlist_songs");
 };
