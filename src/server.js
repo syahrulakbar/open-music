@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 require("dotenv").config();
 
 const Hapi = require("@hapi/hapi");
@@ -39,10 +38,13 @@ const ExportsValidator = require("./validator/exports");
 
 const StorageService = require("./services/storage/StorageService");
 
+const CacheService = require("./services/redis/CacheService");
+
 const init = async () => {
+  const cacheService = new CacheService();
   const collaborationsService = new CollaborationsService();
   const playlistsService = new PlaylistsService(collaborationsService);
-  const albumsService = new AlbumsService();
+  const albumsService = new AlbumsService(cacheService);
   const songsService = new SongsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
@@ -166,6 +168,8 @@ const init = async () => {
         message: "terjadi kegagalan pada server kami",
       });
       newResponse.code(500);
+      console.log(response);
+
       return newResponse;
     }
     // jika bukan error, lanjutkan dengan response sebelumnya (tanpa terintervensi)
