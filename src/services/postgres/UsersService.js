@@ -1,11 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const { Pool } = require("pg");
 const { nanoid } = require("nanoid");
 const bycrypt = require("bcrypt");
 
-const InvariantError = require("../exceptions/InvariantError");
-const AuthenticationError = require("../exceptions/AuthenticationError");
-const NotFoundError = require("../exceptions/NotFoundError");
+const InvariantError = require("../../exceptions/InvariantError");
+const AuthenticationError = require("../../exceptions/AuthenticationError");
+const NotFoundError = require("../../exceptions/NotFoundError");
 
 class UsersService {
   constructor() {
